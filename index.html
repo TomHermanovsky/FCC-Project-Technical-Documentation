@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CSS Technical Documentation</title>
+    <link href="./style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <nav id="navbar">
+      <header><h1>Cascading Style Sheets (CSS)</h1></header>
+      <ul>
+        <li><a href="#Introduction_to_CSS" class="nav-link">Introduction to CSS</a></li>
+        <li><a href="#What_you_need_to_know" class="nav-link">What you need to know</a></li>
+        <li><a href="#CSS_Syntax" class="nav-link">CSS Syntax</a></li>
+        <li><a href="#CSS_Cascade" class="nav-link">CSS Cascade</a></li>
+        <li><a href="#CSS_Inheritance" class="nav-link">CSS Inheritance</a></li>
+        <li><a href="#CSS_Specificity" class="nav-link">CSS Specificity</a></li>
+        <li><a href="#CSS_Selectors" class="nav-link">CSS Selectors</a></li>
+        <li><a href="#CSS_Values_and_Units" class="nav-link">CSS Values and Units</a></li>
+        <li><a href="#CSS_Box_Model" class="nav-link">CSS Box Model</a></li>
+        <li><a href="#Reference" class="nav-link">Reference</a></li>
+      </ul>
+    </nav>
+    <main id="main-doc">
+      <section class="main-section" id="Introduction_to_CSS">
+        <header><h2>Introduction to CSS</h2></header>
+        <p>CSS (Cascading Style Sheets) is a programming language used to style and lay out web pages
+          — for example, to alter the font, color, size, and spacing of your content,
+          split it into multiple columns, or add animations and other decorative features.</p>
+        <ul>
+          <li>CSS stands for Cascading Style Sheets</li>
+          <li>CSS describes how HTML elements are to be displayed on screen, paper, or in other media</li>
+          <li>CSS saves a lot of work. It can control the layout of multiple web pages all at once</li>
+        </ul>
+      </section>
+      <section class="main-section" id="What_you_need_to_know">
+        <header><h2>What you need to know</h2></header>
+        <p>Learning CSS is logical second step on a Web Development learning path. Therefore, the list of prerequisities is
+        really short. Basic understanding of how the web works and familiarity with using HTML are sufficient to learn and start using CSS.</p>
+        <ul>
+          <li>Basic familiarity with using computers, and using the Web passively (i.e. looking at it, consuming the content.)</li>
+          <li>Basic familiarity with HTML</li>
+        </ul>
+      </section>
+      <section class="main-section" id="CSS_Syntax">
+        <header><h2>CSS Syntax</h2></header>
+        <p>The basic goal of the Cascading Stylesheet (CSS) language is to allow a browser engine to paint elements of the page with specific features, like colors, positioning, or decorations.</br>
+           The CSS syntax reflects this goal and its basic building blocks are:</p>
+        <ul>
+          <li>The <strong>property</strong> - which is an identifier, that is a human-readable name, that defines which feature is considered.</li>
+          <li>The <strong>value</strong> - which describe how the feature must be handled by the engine. Each property has a set of valid values, defined by a formal grammar, as well as a semantic meaning, implemented by the browser engine.</li>
+        </ul>
+        <h3>CSS declarations</h3>
+        <p>Setting CSS properties to specific values is the core function of the CSS language. A property and value pair is called a declaration, and any CSS engine calculates which declarations apply to every single element of a page in order to appropriately lay it out, and to style it.
+          Both properties and values are case-insensitive by default in CSS. The pair is separated by a colon, ':' (U+003A COLON), and white spaces before, between, and after properties and values, but not necessarily inside, are ignored.
+          There are more than 100 different properties in CSS and a nearly infinite number of different values. Not all pairs of properties and values are allowed and each property defines what are the valid values. When a value is not valid for a given property, the declaration is deemed invalid and is wholly ignored by the CSS engine.</p>
+
+          <code>
+            background-color:red
+          </code>
+
+        <h3>CSS declaration blocks</h3>
+        <p>Declarations are grouped in blocks, that is in a structure delimited by an opening brace, '{' (U+007B LEFT CURLY BRACKET), and a closing one, '}' (U+007D RIGHT CURLY BRACKET). Blocks sometimes can be nested, so opening and closing braces must be matched.
+          Such blocks are naturally called declaration blocks and declarations inside them are separated by a semi-colon, ';' (U+003B SEMICOLON). A declaration block may be empty, that is containing null declaration. White spaces around declarations are ignored. The last declaration of a block doesn't need to be terminated by a semi-colon, though it is often considered good style to do it as it prevents forgetting to add it when extending the block with another declaration.
+          Example:</p>
+
+          <code>
+            {</br>
+              background-color:red;</br>
+              background-style:none;</br>
+            }
+          </code>
+
+        <h3>CSS rulesets</h3>
+        <p>If style sheets could only apply a declaration to each element of a Web page, they would be pretty useless. The real goal is to apply different declarations to different parts of the document.
+          CSS allows this by associating conditions with declarations blocks. Each (valid) declaration block is preceded by one or more comma-separated selectors, which are conditions selecting some elements of the page. A selector group and an associated declarations block, together, are called a ruleset, or often simply a rule.
+          A CSS ruleset (or rule) is visualized in the diagram below.
+          As an element of the page may be matched by several selectors, and therefore by several rules potentially containing a given property several times, with different values, the CSS standard defines which one has precedence over the other and must be applied: this is called the cascade algorithm.</p>
+
+          <code>
+            div p, #id:first-line {</br>
+                background-color:red;</br>
+                background-style:none;</br>
+              }
+          </code>
+
+        <h3>CSS statements</h3>
+        <p>Rulesets are the main building blocks of a style sheet, which often consists of only a big list of them. But there is other information that a Web author wants to convey in the style sheet, like the character set, other external style sheets to import, font face or list counter descriptions and many more. It will use other and specific kinds of statements to do that.
+          A statement is a building block that begins with any non-space characters and ends at the first closing brace or semi-colon (outside a string, non-escaped and not included into another {}, () or [] pair).
+          There are two kinds of statements:</p>
+          <ul>
+            <li><strong>Rulesets</strong> (or <em>rules</em>) that, as seen, associate a collection of CSS declarations to a condition described by a selector.</li>
+            <li><strong>At-rules</strong> that start with an at sign, '@' (U+0040 COMMERCIAL AT), followed by an identifier and then continuing up to the end of the statement, that is up to the next semi-colon (;) outside of a block, or the end of the next block. Each type of at-rules, defined by the identifier, may have its own internal syntax, and semantics of course. They are used to convey meta-data information (like @charset or @import), conditional information (like @media or @document), or descriptive information (like @font-face).</li>
+          </ul>
+          <p>Any statement which isn't a ruleset or an at-rule is invalid and ignored.<br>
+          There is another group of statements – the nested statements. These are statements that can be used in a specific subset of at-rules – the conditional group rules. These statements only apply if a specific condition is matched: the @media at-rule content is applied only if the device on which the browser runs matches the expressed condition; the @document at-rule content is applied only if the current page matches some conditions, and so on. In CSS1 and CSS2.1, only rulesets could be used inside conditional group rules. That was very restrictive and this restriction was lifted in CSS Conditionals Level 3. Now, though still experimental and not supported by every browser, conditional group rules can contain a wider range of content: rulesets but also some, but not all, at-rules.</p>
+      </section>
+      <section class="main-section" id="CSS_Values_and_Units">
+        <header><h2>CSS Values and Units</h2></header>
+        <p>Every CSS declaration includes a property / value pair.
+          Depending on the property, the value can include a single integer or keyword, to a series of keywords and values with or without units.
+          There are a common set of data types -- values and units -- that CSS properties accept.
+          There are many value types in CSS, some of them very common and some of them that you'll rarely come across. We won't cover all of them exhaustively in this article; just the ones that you are likely to find most useful as you continue on your path towards mastering CSS. In this article we will cover the following CSS values:
+          <ul>
+            <li><strong>Numeric values</strong>: Length values for specifying e.g. element width, border thickness, or font size, and unitless integers for specifying e.g. relative line width or number of times to run an animation.</li>
+            <li><strong>Percentages</strong>: Can also be used to specify size or length — relative to a parent container's width or height for example, or the default font-size. These are often to facilitate responsive design (e.g. creating "liquid layouts", which automatically adjust to fit on different screen sizes).</li>
+            <li><strong>Colors</strong>: For specifying background colors, text colors, etc.</li>
+            <li><strong>Functions</strong>: For specifying e.g. background images or background image gradients.</li>
+          </ul>
+        </p>
+        <p>
+          Example:
+
+            <code>
+              p {</br>
+                font-size: 16px;</br>
+                line-height: 2em;</br>
+              }
+            </code>
+
+        </p>
+
+      </section>
+      <section class="main-section" id="CSS_Cascade">
+        <header><h2>CSS Cascade</h2></header>
+         <p>The <strong>cascade</strong> is an algorithm that defines how to combine property values originating from different sources. It lies at the core of CSS, as emphasized by the name: Cascading Style Sheets.</p>
+         <p>There are three factors to consider, listed here in decreasing order of importance. Earlier ones overrule later ones:</p>
+         <ul>
+           <li><strong>Importance</strong></li>
+           <li><strong>Specificity</strong></li>
+           <li><strong>Source order</strong></li>
+         </ul>
+      </section>
+      <section class="main-section" id="CSS_Inheritance">
+        <header><h2>CSS Inheritance</h2></header>
+         <p>In CSS, inheritance controls what happens when no value is specified for a property on an element.
+           CSS properties can be categorized in two types:</p>
+         <ul>
+           <li><strong>Inherited properties</strong> - which by default are set to the computed value of the parent element</li>
+           <li><strong>Non-inherited properties</strong> - which by default are set to initial value of the property</li>
+        </ul>
+      </section>
+      <section class="main-section" id="CSS_Specificity">
+        <header><h2>CSS Specificity</h2></header>
+         <p>If there are two or more conflicting CSS rules that point to the same element, the browser follows some rules to determine which one is most specific and therefore wins out.
+           Think of specificity as a score/rank that determines which style declarations are ultimately applied to an element.
+           The universal selector (*) has low specificity, while ID selectors are highly specific! </p>
+         <p>Every selector has its place in the specificity hierarchy. There are four categories which define the specificity level of a selector:</br>
+           Inline styles - An inline style is attached directly to the element to be styled. Example:</br>
+
+             <code>
+               < h1 style="color: #ffffff;" >
+             </code>
+
+           IDs - An ID is a unique identifier for the page elements, such as #navbar.</br>
+           Classes, attributes and pseudo-classes - This category includes .classes, [attributes] and pseudo-classes such as :hover, :focus etc.</br>
+           Elements and pseudo-elements - This category includes element names and pseudo-elements, such as h1, div, :before and :after.</p>
+      </section>
+      <section class="main-section" id="CSS_Selectors">
+        <header><h2>CSS Selectors</h2></header>
+        <p>CSS selectors are used to "find" (or select) the HTML elements you want to style.</br>
+          We can divide CSS selectors into five categories:</p>
+        <ul>
+          <li><strong>Simple selectors</strong> (select elements based on name, id, class)</li>
+          <li><strong>Combinator selectors</strong> (select elements based on a specific relationship between them)</li>
+          <li><strong>Pseudo-class selectors</strong> (select elements based on a certain state)</li>
+          <li><strong>Pseudo-elements selectors</strong> (select and style a part of an element)</li>
+          <li><strong>Attribute selectors</strong> (select elements based on an attribute or attribute value)</li>
+        </ul>
+      </section>
+      <section class="main-section" id="CSS_Box_Model">
+        <header><h2>CSS Box Model</h2></header>
+        <p>All HTML elements can be considered as boxes. In CSS, the term "box model" is used when talking about design and layout.
+          The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content. The image below illustrates the box model:</p>
+        <figure>
+          <img src="https://miro.medium.com/max/1400/1*gq1B7v2_gDEi3jkAwAvZNQ.png" alt="CSS Box model illustration">
+        </figure>
+        <p>Explanation of the different parts: </br>
+          <ul>
+            <li><strong>Content</strong> - The content of the box, where text and images appear</li>
+            <li><strong>Padding</strong> - Clears an area around the content. The padding is transparent</li>
+            <li><strong>Border</strong> - A border that goes around the padding and content</li>
+            <li><strong>Margin</strong> - Clears an area outside the border. The margin is transparent</li>
+          </ul>
+          The box model allows us to add a border around elements, and to define space between elements. Example:</p>
+
+            <code>
+              div {</br>
+                width: 300px;</br>
+                border: 15px solid green;</br>
+                padding: 50px;</br>
+                margin: 20px;</br>
+              }
+            </code>
+
+      </section>
+      <section class="main-section" id="Reference">
+        <header><h2>Reference</h2></header>
+        <p>All documentations on this page are taken from <a href="https://www.w3schools.com/css/" target="_blank">W3 school</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">MDN Web Docs</a></p>
+      </section>
+    </main>
+  </body>
+</html>
